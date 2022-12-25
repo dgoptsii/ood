@@ -11,4 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TariffRepository  extends MongoRepository<Tariff, String> {
     Tariff findById(Integer id);
+      /*
+    інші методи потрібні для роботи з бд
+     */
 }

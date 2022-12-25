@@ -10,4 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface InvoiceRepository  extends MongoRepository<Invoice, String> {
      Invoice findById(Integer id);
+       /*
+    інші методи потрібні для роботи з бд
+     */
 }

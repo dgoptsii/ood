@@ -10,4 +10,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CardInfoRepository  extends MongoRepository<CardInfo, String> {
     CardInfo findById(Integer id);
+
+    /*
+    інші методи потрібні для роботи з бд
+     */
 }

@@ -36,21 +36,6 @@ public class InvoiceService {
     private InvoiceRepository invoiceRepository;
 
 
-    // метод для створення підписки на оплату для користувача
-    public UserSubscription createSubscription(UserSubscriptionDTO userSubscriptionInfo) {
-        // створюється підписка на оплату з відповідними параметрами тарифу
-        UserSubscription userSubscription = new UserSubscription();
-       /*
-       1. перевірка що користувач з таким userId, тариф з таким tariffId існують в базі даних, інакше throw new Exception()
-       2. перевірити що всі дані в DTO надійшли коректні, інакше throw new Exception()
-       3. перенести всі поля з userSubscriptionInfo в userSubscription
-       4. якщо оплата автоматична - створити новий CardInfo, зберігти його в базі даних -  cardInfoRepository.save(cardInfo), занести як поле в userSubscription
-        (пояснення до цього рішення в класі CardInfo)
-       5. зберігти userSubscription в базі даних - userSubscriptionRepository.save(userSubscription)
-       */
-        return userSubscriptionRepository.save(userSubscription);
-    }
-
     // метод для створення рахунку за підпискою на оплату
     public Invoice createInvoiceForSubscription(InvoiceDTO invoiceInfo) {
         Invoice invoice = new Invoice();
@@ -104,23 +89,9 @@ public class InvoiceService {
         return null;
     }
 
-
-    // перевірка чи хтось зі списку користувачів не має заборгованості більше ніж на дозволену кількість платежів в певний період часу
-    // блокує користувачів які мають таку заборгованість
-    // повертає список id заблокованих користувачів
-    // тут я припускаю що ця перевірка має викликатись з-зовні, якщо вона має працювати з-середини - її просто можна задати за допомогою Scheduled task
-    // тоді перевірка робитиметься автоматично через певний період і блокуватиме користувачів з заборгованістю
-    public List<Integer> checkUserAndBlock(List<Integer> userIds, Date startDate, Date endDate) {
-        List<Integer> blockedUsers = new ArrayList<>();
-        /* 1. перевіряє що всі користувачі з айді зі списку userIds існують в бд - інкаше throw new Exception()
-        2. дістає з userSubscriptionRepository підписки з таким userId, перевряє що в писку платежів немає такої кількості неспалчених за
-        період від startDate до endDate що перевищував би MAX_NUMBER_UNPAID, інакше user.setBlocked(true)
-        3. зберігає зміни про користувача в userRepository
-        4. додає айді заблокованих користувачів в blockedUsers
-        */
-        return blockedUsers;
-    }
-
+       /*
+    тут можуть бути інші методи для редагування, видалення рахунків про оплату
+    */
 
 
 }

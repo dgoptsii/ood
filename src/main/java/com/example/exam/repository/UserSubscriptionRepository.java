@@ -10,4 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserSubscriptionRepository extends MongoRepository<UserSubscription, String> {
     UserSubscription findById(Integer id);
+      /*
+    інші методи потрібні для роботи з бд
+     */
 }
